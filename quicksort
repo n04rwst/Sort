@@ -1,0 +1,36 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void quickSort(vector <int> &array, int left, int right) {
+    int mid = array[(left + right) / 2];
+    int i = left, j = right;
+    while (i <= j) {
+        while (array[i] < mid)
+            i++;
+        while (array[j] > mid)
+            j--;
+        if (i <= j)
+            swap(array[i++], array[j--]);
+    }
+    if (left < j)
+        quickSort(array, left, j);
+    if (right > i)
+        quickSort(array, i, right);
+}
+
+int main() {
+    int amount;
+    cin >> amount;
+
+    vector <int> array(amount);
+    for (int i = 0; i < amount; i++) {
+        cin >> array[i];
+    }
+
+    quickSort(array, 0, amount - 1);
+    for (auto now : array) {
+        cout << now << " ";
+    }
+    return 0;
+}
